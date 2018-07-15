@@ -16,7 +16,7 @@ public class BackgroundReposition : MonoBehaviour {
         Vector3 center;
         center.x = Mathf.FloorToInt((player.transform.position.x +8) / 16);
         center.y = Mathf.FloorToInt((player.transform.position.y + 8) / 16);
-        center.z = 0;
+        center.z = 1;
         Reposition(center * 16);
     }
 
