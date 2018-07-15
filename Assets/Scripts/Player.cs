@@ -55,11 +55,18 @@ public class Player : MonoBehaviour {
 
     public void Die()
     {
+        int score = scoreKeeper.score;
+       
+        if (PlayerPrefs.GetInt("highestScore") <= score)
+        {
+            PlayerPrefs.SetInt("highestScore", score);
+        }
+        print("The highest score: " + PlayerPrefs.GetInt("highestScore"));
+        
         dead = true;
         print("Game Over");
         GetComponent<SpriteRenderer>().enabled = false;
         levelManager.LoadLevel("Lose");
-
     }
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -72,22 +79,13 @@ public class Player : MonoBehaviour {
             if(health <= 0)
             {
                 Die();
+                
             }
+            
         }
     }
     public void ScorePoints()
     {
         scoreKeeper.Score(scoreOverTime);
-    }
-
-
-
-
-
-
-
-
-
-
-    
+    }    
 }
