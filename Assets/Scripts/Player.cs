@@ -5,13 +5,23 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class Player : MonoBehaviour {
     Rigidbody2D rb;
-    public float turnSpeed = 30;
-    public float speed = 30;
+    public GameObject projectile;
+
+    private float turnSpeed = 180f;
+    public float health = 200f;
+    public float speed;
     public bool dead = false;
-	// Use this for initialization
-	void Start () {
+
+    private ScoreKeeper scoreKeeper;
+    public int scoreOverTime = 65;
+
+    public LevelManager levelManager;
+    // Use this for initialization
+    void Start () {
         rb = GetComponent<Rigidbody2D>();
-	}
+        scoreKeeper = GameObject.Find("Score").GetComponent<ScoreKeeper>();
+        InvokeRepeating("ScorePoints", 0.0001f, 1.0f);
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -40,7 +50,7 @@ public class Player : MonoBehaviour {
         }
         
         transform.Translate(Vector3.up * speed * Time.deltaTime);
-
+        
     }
 
     public void Die()
@@ -48,5 +58,36 @@ public class Player : MonoBehaviour {
         dead = true;
         print("Game Over");
         GetComponent<SpriteRenderer>().enabled = false;
+        levelManager.LoadLevel("Lose");
+
     }
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        ProjectileEnemy missile = collision.gameObject.GetComponent<ProjectileEnemy>();
+        if (missile)
+        {
+            health -= missile.getDamage();
+            missile.Hit();
+            if(health <= 0)
+            {
+                Die();
+            }
+        }
+    }
+    public void ScorePoints()
+    {
+        scoreKeeper.Score(scoreOverTime);
+    }
+
+
+
+
+
+
+
+
+
+
+    
 }
