@@ -2,12 +2,37 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class LevelManager : MonoBehaviour {
 
     private string levelName = "GameScene";
+    public Button stage2;
+    private static int currentScore = 0;
+    
 
-	public void LoadLevel(string name)
+    public void Start()
+    {
+        DontDestroyOnLoad(this);
+        DisplayStage();
+    }
+
+    public void DisplayStage()
+    {
+        if (stage2 != null)
+        {
+            if (PlayerPrefs.GetInt("highestScore") >= 1500)
+            {
+                stage2.interactable = true;
+            }
+            else
+            {
+                stage2.interactable = false;
+            }
+        }
+    }
+
+    public void LoadLevel(string name)
     {
         SceneManager.LoadScene(name);
     }
@@ -42,5 +67,23 @@ public class LevelManager : MonoBehaviour {
                 break;
         }
     }
+
+    public void ResetScore()
+    {
+        PlayerPrefs.SetInt("highestScore", 0);
+        DisplayStage();
+        HighestScoreDisplay.ResetScore();
+    }
+
+    public static int GetCurrentScore()
+    {
+        return currentScore;
+    }
+
+    public static void SetCurrentScore(int cs)
+    {
+        currentScore = cs;
+    }
+
 
 }

@@ -20,6 +20,7 @@ public class Player : MonoBehaviour {
     void Start () {
         rb = GetComponent<Rigidbody2D>();
         scoreKeeper = GameObject.Find("Score").GetComponent<ScoreKeeper>();
+        levelManager = FindObjectOfType<LevelManager>();
         InvokeRepeating("ScorePoints", 0.0001f, 1.0f);
     }
 	
