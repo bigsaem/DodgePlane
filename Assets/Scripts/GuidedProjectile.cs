@@ -2,61 +2,60 @@
 using System.Collections.Generic;
 using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
-public class Projectile : MonoBehaviour
-{
+public class GuidedProjectile : MonoBehaviour {
 
 
-
-    Player thePlayer;
+    
+    Player player;
     Enemy enemy;
 
-    public float bulletSpeed;
-    public float rotateValue;
-    public float damage;
+    ScoreKeeper scoreKeeper;
+    public int scoreValue;
 
-    private Rigidbody2D rigidb;
+    public float speed;
+    public float rotateSpeed;
+    public float damage;
+    
+    private Rigidbody2D rb;
 
     private int duration;
-    //private float timer;
-
+    private float timer;
+    
     void Start()
     {
-
-        //timer = 0;
-        //duration = 0;
-        rigidb = GetComponent<Rigidbody2D>();
-        thePlayer = FindObjectOfType<Player>();
-        enemy = FindObjectOfType<Enemy>();
+        scoreKeeper = GameObject.Find("Score").GetComponent<ScoreKeeper>();
+        timer = 0;
+        duration = 0;
+        rb = GetComponent<Rigidbody2D>();
+        player = FindObjectOfType<Player>();
     }
 
     void FixedUpdate()
     {
-        /*
-        Vector2 direction = (Vector2)enemy.transform.position - rigidb.position;
+        Vector2 direction = (Vector2)player.transform.position - rb.position;
 
         direction.Normalize();
-        //direction = direction;
 
         float rotateAmount = Vector3.Cross(direction, transform.up).z;
 
-        rigidb.angularVelocity = -rotateAmount * rotateValue;
-        rigidb.velocity = transform.up * bulletSpeed;
-        */
-
-
-
+        rb.angularVelocity = -rotateAmount * rotateSpeed;
         /*
         var heading = this.transform.position - target.transform.position;
         var distance = heading.magnitude;
         directionToPlayer = heading / distance;
         */
 
-
+        rb.velocity = transform.up * speed;
     }
     private void Update()
     {
-        
-        if (Vector3.Distance(transform.position, thePlayer.transform.position) > 10)
+        timer += Time.deltaTime;
+        duration = Mathf.FloorToInt(timer % 60);
+        if(duration > 10)
+        {
+            Destroy(gameObject);
+        }
+        if (Vector3.Distance(transform.position, player.transform.position) > 10)
         {
             Destroy(gameObject);
         }
@@ -64,9 +63,11 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.GetComponent<Enemy>() != null)
+        if (col.GetComponent<Player>() != null)
         {
+            scoreKeeper.Score(scoreValue);
             Destroy(gameObject);
+            
         }
         /*
         else if(col.GetComponent<Enemy>() != null)
@@ -78,12 +79,23 @@ public class Projectile : MonoBehaviour
             
         }
         */
-        else if (col.GetComponent<GuidedProjectile>() != null)
+        else if(col.GetComponent<GuidedProjectile>() != null)
         {
+            scoreKeeper.Score(scoreValue);
             Destroy(gameObject);
+            
+        }
+        else if(col.GetComponent<Projectile>() != null)
+        {
+            scoreKeeper.Score(scoreValue);
+            Destroy(gameObject);
+            
         }
     }
-    
+    public float getDamage()
+    {
+        return damage;
+    }
 
 
     /*

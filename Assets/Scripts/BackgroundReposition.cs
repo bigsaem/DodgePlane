@@ -5,6 +5,7 @@ using UnityEngine;
 public class BackgroundReposition : MonoBehaviour {
     public GameObject[] mapArray;
     Player player;
+    private Vector3 center;
     private void Awake()
     {
         mapArray = GameObject.FindGameObjectsWithTag("map");
@@ -13,12 +14,14 @@ public class BackgroundReposition : MonoBehaviour {
 
     private void Update()
     {
-        Vector3 center;
+        
         center.x = Mathf.FloorToInt((player.transform.position.x +8) / 16);
         center.y = Mathf.FloorToInt((player.transform.position.y + 8) / 16);
         center.z = 1;
         Reposition(center * 16);
     }
+
+
 
 
     private void Reposition(Vector3 center)

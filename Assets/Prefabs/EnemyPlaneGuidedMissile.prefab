@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 70565129733632596}
   - component: {fileID: 50954073175469194}
   m_Layer: 0
-  m_Name: EnemyPlane1
+  m_Name: EnemyPlaneGuidedMissile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -89,12 +89,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fdc7b5c20aeea94299f0aee616807e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectile: {fileID: 1698607137889096, guid: 913414ffdb617c846a6f539c7556cc55, type: 2}
+  projectile: {fileID: 1698607137889096, guid: 83da27a14d699db4f9c1aa47a28173c1, type: 2}
   speed: 1
   startMoving: 0
-  shorsPerSecond: 0.1
-  projectileSpeed: 5
+  shotsPerSecond: 0.5
+  projectileSpeed: 3
+  guidedMissileActive: 1
+  nonGuidedMissileActive: 0
+  shotgunMissileActive: 0
+  friendlyFire: 1
+  damage: 100
+  scoreValue: 75
   fireSound: {fileID: 8300000, guid: 23557234d6d4eb948a8ff1e98be576fb, type: 3}
+  directionToPlayer: {x: 0, y: 0, z: 0}
 --- !u!212 &212831918500931898
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -129,7 +136,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 1ffde1789a1b01341abee1e65bd91ff7, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 75ece8899d5bb394a91708d050f6b680, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
