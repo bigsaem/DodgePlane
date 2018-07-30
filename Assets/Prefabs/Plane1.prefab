@@ -113,12 +113,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f404e7b142d7dbf4092d12e5be1c0b51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectile: {fileID: 0}
-  turnSpeed: 180
-  health: 200
-  speed: 5
+  projectile: {fileID: 1698607137889096, guid: 736e27bd33e764f42a30f74ab0290798, type: 2}
+  health: 100
   dead: 0
-  scoreOverTime: 65
+  projectileSpeed: 15
   levelManager: {fileID: 0}
 --- !u!212 &212244888098397960
 SpriteRenderer:

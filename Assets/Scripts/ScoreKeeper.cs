@@ -42,8 +42,8 @@ public class ScoreKeeper : MonoBehaviour {
 
     public void ResetScore()
     {
-        score = 0;
-        scoreText.text = score.ToString();
+        PlayerPrefs.SetInt("highestScore", 0);
+        HighestScoreDisplay.ResetScore();
     }
     /*
     public void ScorePoints()

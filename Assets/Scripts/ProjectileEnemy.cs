@@ -4,26 +4,57 @@ using UnityEngine;
 
 public class ProjectileEnemy : MonoBehaviour {
     Player player;
+    ScoreKeeper scoreKeeper;
+    public int scoreValue;
     private void Awake()
     {
+        scoreKeeper = GameObject.Find("Score").GetComponent<ScoreKeeper>();
         player = FindObjectOfType<Player>();
     }
     private void Update()
     {
-        if (Vector3.Distance(transform.position, player.transform.position) > 20)
+        if (Vector3.Distance(transform.position, player.transform.position) > 15)
         {
             Destroy(gameObject);
         }
     }
-    public float damage = 100f;
+    public float damage;
 
     public float getDamage()
     {
         return damage;
     }
 
-    public void Hit()
+    
+    private void OnTriggerEnter2D(Collider2D col)
     {
-        Destroy(gameObject);
+        if (col.GetComponent<Player>() != null)
+        {
+            scoreKeeper.Score(scoreValue);
+            Destroy(gameObject);
+            
+        }
+        /*
+        else if(col.GetComponent<Enemy>() != null)
+        {
+            if (enemy.getFriendlyFire())
+            {
+                Destroy(gameObject);
+            }
+            
+        }
+        */
+        else if (col.GetComponent<GuidedProjectile>() != null)
+        {
+            scoreKeeper.Score(scoreValue);
+            Destroy(gameObject);
+            
+        }
+        else if (col.GetComponent<Projectile>() != null)
+        {
+            scoreKeeper.Score(scoreValue);
+            Destroy(gameObject);
+            
+        }
     }
 }
