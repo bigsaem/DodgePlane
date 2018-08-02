@@ -100,6 +100,7 @@ MonoBehaviour:
   friendlyFire: 1
   damage: 100
   scoreValue: 50
+  explode: {fileID: 8300000, guid: cf8ac43adf1d2744c9c49ca83a8c2423, type: 3}
   fireSound: {fileID: 8300000, guid: 23557234d6d4eb948a8ff1e98be576fb, type: 3}
   directionToPlayer: {x: 0, y: 0, z: 0}
 --- !u!212 &212831918500931898

@@ -18,6 +18,10 @@ public class HighestScoreDisplay : MonoBehaviour
 
     public static void ResetScore()
     {
-        scoreText.text = "Highest Score: " + PlayerPrefs.GetInt("highestScore");
+        if (scoreText != null)
+        {
+            scoreText.text = "Highest Score: " + PlayerPrefs.GetInt("highestScore");
+        }
+        
     }
 }

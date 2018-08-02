@@ -15,7 +15,7 @@ public class Player : MonoBehaviour {
     private float speed = 5f;
     public bool dead = false;
     public float projectileSpeed;
-
+    public int coin = 0;
 
 
     private ScoreKeeper scoreKeeper;
@@ -47,6 +47,11 @@ public class Player : MonoBehaviour {
     private bool pointBoostTimer = false;
     private int pointBoostStart;
 
+    public AudioClip explode;
+    public AudioClip itemPickup;
+    public AudioClip itemUsage;
+    internal AudioSource AudioS;
+
     public LevelManager levelManager;
     // Use this for initialization
     void Start () {
@@ -54,7 +59,8 @@ public class Player : MonoBehaviour {
         scoreKeeper = GameObject.Find("Score").GetComponent<ScoreKeeper>();
         InvokeRepeating("ScorePoints", 0.0001f, 1.0f);
         timer = 0;
-        
+        AudioS = GetComponent<AudioSource>();
+        print(PlayerPrefs.GetInt("highestScore"));
     }
     
     // Update is called once per frame
@@ -208,13 +214,16 @@ public class Player : MonoBehaviour {
                 transform.Rotate(0, 0, turnSpeed * Time.deltaTime);
             }
         }
+        if (health > 0)
+        {
+            transform.Translate(Vector3.up * speed * Time.deltaTime);
+        }
         
-        transform.Translate(Vector3.up * speed * Time.deltaTime);
         //print(transform.eulerAngles.x);
         //print(transform.eulerAngles.y);
         eulerAngle = transform.eulerAngles.z;
         //print(eulerAngle);
-        print(6*Mathf.Cos(eulerAngle * Mathf.Deg2Rad));
+        //print(6*Mathf.Cos(eulerAngle * Mathf.Deg2Rad));
         //print(Mathf.Sin(eulerAngle * Mathf.Deg2Rad));
         //Vector3 spawnPos = (player.transform.position) + new Vector3(player.transform.position.x/Mathf.Abs(player.transform.position.x), player.transform.position.y/ Mathf.Abs(player.transform.position.y), 0);
         /*
@@ -239,21 +248,29 @@ public class Player : MonoBehaviour {
     }
     public void Die()
     {
+        AudioS.PlayOneShot(explode);
+        GetComponent<SpriteRenderer>().enabled = false;
+        GetComponent<Collider2D>().enabled = false;
+        Invoke("SetHighScore", 1);
+    }
+
+    public void SetHighScore()
+    {
         //start
         int score = scoreKeeper.score;
-
+        print("First: The highest score: " + PlayerPrefs.GetInt("highestScore"));
         if (PlayerPrefs.GetInt("highestScore") <= score)
         {
             PlayerPrefs.SetInt("highestScore", score);
         }
-        print("The highest score: " + PlayerPrefs.GetInt("highestScore"));
+        PlayerPrefs.SetInt("currentScore", score);
+        print("After: The highest score: " + PlayerPrefs.GetInt("highestScore"));
         //end
 
         dead = true;
         print("Game Over");
         GetComponent<SpriteRenderer>().enabled = false;
         levelManager.LoadLevel("Lose");
-
     }
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -301,8 +318,8 @@ public class Player : MonoBehaviour {
 
     public void RocketBoost()
     {
-        
 
+        AudioS.PlayOneShot(itemPickup);
 
         rocketStart = seconds;
         rocketTimer = true;
@@ -315,6 +332,7 @@ public class Player : MonoBehaviour {
     }
     public void ShieldBoost()
     {
+        AudioS.PlayOneShot(itemPickup);
         shieldStart = seconds;
         shieldTimer = true;
         //health = 400;
@@ -322,6 +340,7 @@ public class Player : MonoBehaviour {
     }
     public void PowerBoost()
     {
+        AudioS.PlayOneShot(itemPickup);
         powerBoostStart = seconds;
         powerBoostTimer = true;
         turnSpeed = 360;
@@ -331,6 +350,7 @@ public class Player : MonoBehaviour {
     }
     public void PointBoost()
     {
+        AudioS.PlayOneShot(itemPickup);
         pointBoostStart = seconds;
         pointBoostTimer = true;
         scoreOverTime = 130;
@@ -366,7 +386,10 @@ public class Player : MonoBehaviour {
         }
     }
 
-
+    public void GetCoin(int num)
+    {
+        coin += num;
+    }
 
 
 

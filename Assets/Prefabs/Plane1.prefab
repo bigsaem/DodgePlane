@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 50585143854539354}
   - component: {fileID: 114401138426697946}
   - component: {fileID: 60185148715691584}
+  - component: {fileID: 82769865420641560}
   m_Layer: 0
   m_Name: Plane1
   m_TagString: Untagged
@@ -102,6 +103,86 @@ PolygonCollider2D:
       - {x: 0.48999998, y: -0.175}
       - {x: 0.3810833, y: -0.11797592}
       - {x: 0.12869985, y: 0.19369948}
+--- !u!82 &82769865420641560
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1491187737488508}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!114 &114401138426697946
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -114,9 +195,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectile: {fileID: 1698607137889096, guid: 736e27bd33e764f42a30f74ab0290798, type: 2}
+  eulerAngle: 0
   health: 100
   dead: 0
   projectileSpeed: 15
+  coin: 0
+  seconds: 0
+  explode: {fileID: 8300000, guid: cf8ac43adf1d2744c9c49ca83a8c2423, type: 3}
+  itemPickup: {fileID: 8300000, guid: 7ffe84789398cc74789419cf81a58c72, type: 3}
+  itemUsage: {fileID: 8300000, guid: ee9a04d59c5e46c46a3e904c5933e901, type: 3}
   levelManager: {fileID: 0}
 --- !u!212 &212244888098397960
 SpriteRenderer:
