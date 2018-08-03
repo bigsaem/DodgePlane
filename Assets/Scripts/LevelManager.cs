@@ -18,4 +18,9 @@ public class LevelManager : MonoBehaviour {
     {
         Application.LoadLevel(Application.loadedLevel + 1);
     }
+    public void ResetScore()
+    {
+        PlayerPrefs.SetInt("highestScore", 0);
+        HighestScoreDisplay.ResetScore();
+    }
 }

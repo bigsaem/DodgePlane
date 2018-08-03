@@ -51,10 +51,8 @@ public class Player : MonoBehaviour {
     // Use this for initialization
     void Start () {
         rb = GetComponent<Rigidbody2D>();
-        
         scoreKeeper = GameObject.Find("Score").GetComponent<ScoreKeeper>();
         InvokeRepeating("ScorePoints", 0.0001f, 1.0f);
-
         timer = 0;
         
     }
@@ -136,10 +134,10 @@ public class Player : MonoBehaviour {
             }
         }
         
-
+        /*
         if (shieldPickUp)
         {
-            GetComponent<Renderer>().material.color = Color.blue;
+            
             if (shieldStart + 10 <= seconds)
             {
                 shieldTimer = false;
@@ -147,14 +145,18 @@ public class Player : MonoBehaviour {
                 {
                     //health = 200;
                     shieldPickUp = false;
-                    GetComponent<Renderer>().material.color = Color.red;
+                    GetComponent<Renderer>().material.color = Color.white;
                 }
             }
+            
         }
+        */
+    
+
 
         if (powerBoostPickUp)
         {
-            GetComponent<Renderer>().material.color = Color.yellow;
+            
             if (powerBoostStart + 10 <= seconds)
             {
                 powerBoostTimer = false;
@@ -167,7 +169,15 @@ public class Player : MonoBehaviour {
                     
                     
                     powerBoostPickUp = false;
-                    GetComponent<Renderer>().material.color = Color.white;
+                    if (shieldTimer)
+                    {
+                        GetComponent<Renderer>().material.color = Color.blue;
+                    }
+                    else
+                    {
+                        GetComponent<Renderer>().material.color = Color.white;
+                    }
+                    
                 }
             }
         }
@@ -246,6 +256,16 @@ public class Player : MonoBehaviour {
     }
     public void Die()
     {
+        //start
+        int score = scoreKeeper.score;
+
+        if (PlayerPrefs.GetInt("highestScore") <= score)
+        {
+            PlayerPrefs.SetInt("highestScore", score);
+        }
+        print("The highest score: " + PlayerPrefs.GetInt("highestScore"));
+        //end
+
         dead = true;
         print("Game Over");
         GetComponent<SpriteRenderer>().enabled = false;
@@ -312,6 +332,11 @@ public class Player : MonoBehaviour {
     }
     public void ShieldBoost()
     {
+        if (!powerBoostPickUp)
+        {
+            GetComponent<Renderer>().material.color = Color.blue;
+        }
+        //GetComponent<Renderer>().material.color = Color.blue;
         shieldStart = seconds;
         shieldTimer = true;
         //health = 400;
@@ -319,6 +344,7 @@ public class Player : MonoBehaviour {
     }
     public void PowerBoost()
     {
+        GetComponent<Renderer>().material.color = Color.yellow;
         powerBoostStart = seconds;
         powerBoostTimer = true;
         turnSpeed = 360;
@@ -345,7 +371,7 @@ public class Player : MonoBehaviour {
         if (!powerBoostTimer) {
             if (shieldTimer)
             {
-                GetComponent<Renderer>().material.color = Color.red;
+                GetComponent<Renderer>().material.color = Color.white;
                 shieldTimer = false;
                 
             }

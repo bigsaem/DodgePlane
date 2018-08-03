@@ -6,7 +6,7 @@ using UnityEngine;
 public class Enemy : MonoBehaviour {
 
     public GameObject projectile;
-
+    public GameObject explosion;
 
     
     GameObject guidedMissile;
@@ -256,6 +256,8 @@ public class Enemy : MonoBehaviour {
     void Die()
     {
         Destroy(gameObject);
+        Instantiate(explosion, transform.position, Quaternion.identity);
+        
     }
 
     
