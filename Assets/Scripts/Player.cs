@@ -139,6 +139,7 @@ public class Player : MonoBehaviour {
 
         if (shieldPickUp)
         {
+            GetComponent<Renderer>().material.color = Color.blue;
             if (shieldStart + 10 <= seconds)
             {
                 shieldTimer = false;
@@ -146,12 +147,14 @@ public class Player : MonoBehaviour {
                 {
                     //health = 200;
                     shieldPickUp = false;
+                    GetComponent<Renderer>().material.color = Color.red;
                 }
             }
         }
 
         if (powerBoostPickUp)
         {
+            GetComponent<Renderer>().material.color = Color.yellow;
             if (powerBoostStart + 10 <= seconds)
             {
                 powerBoostTimer = false;
@@ -164,12 +167,14 @@ public class Player : MonoBehaviour {
                     
                     
                     powerBoostPickUp = false;
+                    GetComponent<Renderer>().material.color = Color.white;
                 }
             }
         }
 
         if (pointBoostPickUp)
         {
+            
             if (pointBoostStart + 5 <= seconds)
             {
                 pointBoostTimer = false;
@@ -335,11 +340,14 @@ public class Player : MonoBehaviour {
 
     public void Crash()
     {
-        
+        //GetComponent<Renderer>().material.color = Color.white;
+
         if (!powerBoostTimer) {
             if (shieldTimer)
             {
+                GetComponent<Renderer>().material.color = Color.red;
                 shieldTimer = false;
+                
             }
             else
             {
