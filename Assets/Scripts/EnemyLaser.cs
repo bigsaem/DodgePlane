@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyLaser : MonoBehaviour {
+public class EnemyLaser : EnemyUnit {
 
 
     Player player;

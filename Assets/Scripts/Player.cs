@@ -16,11 +16,11 @@ public class Player : MonoBehaviour {
     public bool dead = false;
     public float projectileSpeed;
     public int coin = 0;
-
+    
 
     private ScoreKeeper scoreKeeper;
     private int scoreOverTime = 65;
-
+    private Camera cam;
 
 
 
@@ -61,6 +61,7 @@ public class Player : MonoBehaviour {
         timer = 0;
         AudioS = GetComponent<AudioSource>();
         print(PlayerPrefs.GetInt("highestScore"));
+        cam = FindObjectOfType<Camera>();
     }
     
     // Update is called once per frame
@@ -359,6 +360,19 @@ public class Player : MonoBehaviour {
     public void ScorePoints()
     {
         scoreKeeper.Score(scoreOverTime);
+    }
+
+    public void Bomb()
+    {
+        EnemyUnit[] enemies = FindObjectsOfType<EnemyUnit>();
+        foreach(EnemyUnit e in enemies)
+        {
+            Vector3 viewPoint = cam.WorldToViewportPoint(e.transform.position);
+            if(viewPoint.x < 0 || viewPoint.x > 1 || viewPoint.y < 0 || viewPoint.y > 0)
+            {
+                e.DestroyByBomb();
+            }
+        }
     }
 
     public void Crash()
