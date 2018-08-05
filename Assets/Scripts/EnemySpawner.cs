@@ -16,7 +16,8 @@ public class EnemySpawner : MonoBehaviour {
 	void Start () {
         player = FindObjectOfType<Player>();
         StartCoroutine(RandomSpawn(enemies[0], 0.2f, 1));
-        StartCoroutine(RandomLaserSpawn(enemylaser, 5, 6));
+        //StartCoroutine(RandomSpawn(enemies[4], 4, 5));
+
     }
 
     private void Update()
@@ -31,13 +32,20 @@ public class EnemySpawner : MonoBehaviour {
         if(player.getSeconds() == 25)
         {
             StartCoroutine(RandomSpawn(enemies[2], 2, 3));
+            StartCoroutine(RandomLaserSpawn(enemylaser, 5, 6));
             player.addToTimer();
         }
-        if (player.getSeconds() == 50)
+        if (player.getSeconds() == 40)
         {
             StartCoroutine(RandomSpawn(enemies[3], 3, 4));
             player.addToTimer();
         }
+        if (player.getSeconds() == 60)
+        {
+            StartCoroutine(RandomSpawn(enemies[4], 4, 5));
+            player.addToTimer();
+        }
+
 
     }
     private IEnumerator RandomSpawn(Enemy enemy, float range1, float range2)

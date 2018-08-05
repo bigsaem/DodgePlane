@@ -7,7 +7,7 @@ public class Player : MonoBehaviour {
     Rigidbody2D rb;
     Enemy enemy;
     public GameObject projectile;
-
+    public Shield shield;
     public float eulerAngle;
 
     private float turnSpeed = 180f;
@@ -38,6 +38,7 @@ public class Player : MonoBehaviour {
     private bool shieldPickUp = false;
     private bool shieldTimer = false;
     private int shieldStart;
+    //public Renderer rend;
 
     private bool powerBoostPickUp = false;
     private bool powerBoostTimer = false;
@@ -50,6 +51,7 @@ public class Player : MonoBehaviour {
     public LevelManager levelManager;
     // Use this for initialization
     void Start () {
+        //Instantiate(shield, transform.position, Quaternion.identity);
         rb = GetComponent<Rigidbody2D>();
         scoreKeeper = GameObject.Find("Score").GetComponent<ScoreKeeper>();
         InvokeRepeating("ScorePoints", 0.0001f, 1.0f);
@@ -122,7 +124,7 @@ public class Player : MonoBehaviour {
             */
 
 
-            if (rocketStart + 10 <= seconds)
+            if (rocketStart + 5 <= seconds)
             {
                 rocketTimer = false;
                 firing = false;
@@ -157,7 +159,7 @@ public class Player : MonoBehaviour {
         if (powerBoostPickUp)
         {
             
-            if (powerBoostStart + 10 <= seconds)
+            if (powerBoostStart + 7.5 <= seconds)
             {
                 powerBoostTimer = false;
                 if (!powerBoostTimer)
@@ -169,14 +171,9 @@ public class Player : MonoBehaviour {
                     
                     
                     powerBoostPickUp = false;
-                    if (shieldTimer)
-                    {
-                        GetComponent<Renderer>().material.color = Color.blue;
-                    }
-                    else
-                    {
-                        GetComponent<Renderer>().material.color = Color.white;
-                    }
+                    
+                    GetComponent<Renderer>().material.color = Color.white;
+                    
                     
                 }
             }
@@ -231,7 +228,7 @@ public class Player : MonoBehaviour {
         //print(transform.eulerAngles.y);
         eulerAngle = transform.eulerAngles.z;
         //print(eulerAngle);
-        print(6*Mathf.Cos(eulerAngle * Mathf.Deg2Rad));
+        //print(6*Mathf.Cos(eulerAngle * Mathf.Deg2Rad));
         //print(Mathf.Sin(eulerAngle * Mathf.Deg2Rad));
         //Vector3 spawnPos = (player.transform.position) + new Vector3(player.transform.position.x/Mathf.Abs(player.transform.position.x), player.transform.position.y/ Mathf.Abs(player.transform.position.y), 0);
         /*
@@ -241,6 +238,10 @@ public class Player : MonoBehaviour {
         }
         */
 
+    }
+    public float getTurnSpeed()
+    {
+        return turnSpeed;
     }
     public float getAngle()
     {
@@ -332,15 +333,33 @@ public class Player : MonoBehaviour {
     }
     public void ShieldBoost()
     {
-        if (!powerBoostPickUp)
+        if (!shieldTimer)
         {
-            GetComponent<Renderer>().material.color = Color.blue;
+            shield = InstantiateShield(shield);
+            shield.RenderOn();
+            //rend = GetComponent<Renderer>();
+            //rend.enabled = true;
+            
+            
+
         }
+        
+        
+        
+        
         //GetComponent<Renderer>().material.color = Color.blue;
         shieldStart = seconds;
         shieldTimer = true;
         //health = 400;
         shieldPickUp = true;
+    }
+    Shield InstantiateShield(Shield thisShield)
+    {
+        
+        Shield s = Instantiate(thisShield, transform.position, Quaternion.identity);
+        s.transform.Rotate(0, 0, getAngle());
+
+        return s;
     }
     public void PowerBoost()
     {
@@ -371,7 +390,21 @@ public class Player : MonoBehaviour {
         if (!powerBoostTimer) {
             if (shieldTimer)
             {
-                GetComponent<Renderer>().material.color = Color.white;
+                /* NEEDS FIXING!!!!!!!!!
+                 !
+                 !
+                 !
+                 !
+                 !
+                 !
+                 !
+                 !
+                 !
+                 !
+                 !!!!!!!!!!!!!!!!!!!!!!!!!!!*/
+                //DestroyObject(shield);
+                //rend.enabled = false;
+                shield.RenderOff();
                 shieldTimer = false;
                 
             }

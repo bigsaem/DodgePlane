@@ -89,6 +89,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37b13031dc4382e4eaf4ac374323387b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sparkle: {fileID: 1838776619825924, guid: 6098a1bfeb7b09f4e95a1a8a6cde0abf, type: 2}
   speed: 1
   startMoving: 0
   itemNumber: 1

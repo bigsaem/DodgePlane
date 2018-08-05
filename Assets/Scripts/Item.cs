@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Item : MonoBehaviour {
 
+    public GameObject sparkle;
     Player player;
     public float speed;
     public bool startMoving;
@@ -76,5 +77,6 @@ public class Item : MonoBehaviour {
     void Die()
     {
         Destroy(gameObject);
+        Instantiate(sparkle, transform.position, Quaternion.identity);
     }
 }
