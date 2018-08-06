@@ -13,10 +13,10 @@ public class ItemSpawner : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         player = FindObjectOfType<Player>();
-        StartCoroutine(RandomSpawn(items[0]));
-        StartCoroutine(RandomSpawn(items[1]));
-        StartCoroutine(RandomSpawn(items[2]));
-        StartCoroutine(RandomSpawn(items[3]));
+        foreach(Item item in items)
+        {
+            StartCoroutine(RandomSpawn(item));
+        }
     }
 	
 	// Update is called once per frame

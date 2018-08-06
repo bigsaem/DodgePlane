@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class Enemy : MonoBehaviour {
+public class Enemy : EnemyUnit {
 
     public GameObject projectile;
-    public GameObject explosion;
 
     
     GameObject guidedMissile;
@@ -254,18 +253,5 @@ public class Enemy : MonoBehaviour {
         }
     }
 
-    void Die()
-    {
-        //AudioSource.PlayClipAtPoint(explode, transform.position);
-        GetComponent<SpriteRenderer>().enabled = false;
-        GetComponent<Collider2D>().enabled = false;
-        Invoke("DestroyThis", 0.8f);
-        Instantiate(explosion, transform.position, Quaternion.identity);
-    }
-
-    void DestroyThis()
-    {
-        Destroy(gameObject);
-    }
 
 }

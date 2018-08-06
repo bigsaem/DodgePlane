@@ -68,6 +68,9 @@ public class Item : MonoBehaviour {
             }else if(itemNumber == 3)
             {
                 player.PointBoost();
+            }else if(itemNumber == 4)
+            {
+                player.BombObjects();
             }
             
             Die();

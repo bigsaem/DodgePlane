@@ -16,6 +16,8 @@ public class Player : MonoBehaviour {
     private float speed = 5f;
     public bool dead = false;
     public float projectileSpeed;
+    private Bomb bomb;
+    internal bool invulnerable = false;
 
 
 
@@ -63,7 +65,8 @@ public class Player : MonoBehaviour {
         timer = 0;
         AudioS = GetComponent<AudioSource>();
         print(PlayerPrefs.GetInt("highestScore"));
-
+        bomb = GetComponentInChildren<Bomb>();
+        bomb.gameObject.SetActive(false);
     }
     
     // Update is called once per frame
@@ -390,7 +393,7 @@ public class Player : MonoBehaviour {
         powerBoostTimer = true;
         turnSpeed = 360;
         speed = 10;
-        //health = 1000000;
+          
         powerBoostPickUp = true;
     }
     public void PointBoost()
@@ -400,6 +403,13 @@ public class Player : MonoBehaviour {
         pointBoostTimer = true;
         scoreOverTime = 130;
         pointBoostPickUp = true;
+    }
+
+    public void BombObjects()
+    {
+        invulnerable = true;
+        bomb.gameObject.SetActive(true);
+        bomb.Explode();
     }
     public void ScorePoints()
     {
@@ -433,7 +443,11 @@ public class Player : MonoBehaviour {
             }
             else
             {
-                health -= 100;
+                if (!invulnerable)
+                {
+                    health -= 100;
+                }
+                
             }
             
         }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Laser : MonoBehaviour {
+public class Laser : EnemyUnit {
     private float timer;
     public int seconds;
     // Use this for initialization
