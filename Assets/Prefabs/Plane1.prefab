@@ -117,6 +117,7 @@ TrailRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
@@ -145,18 +146,24 @@ TrailRenderer:
     widthCurve:
       serializedVersion: 2
       m_Curve:
-      - serializedVersion: 2
+      - serializedVersion: 3
         time: 0
         value: 1
         inSlope: 0
         outSlope: 0
         tangentMode: 0
-      - serializedVersion: 2
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
         time: 0.4416111
         value: 0
         inSlope: 0
         outSlope: 0
         tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 0
@@ -214,6 +221,9 @@ MonoBehaviour:
   dead: 0
   projectileSpeed: 15
   seconds: 0
+  explode: {fileID: 8300000, guid: cf8ac43adf1d2744c9c49ca83a8c2423, type: 3}
+  itemPickup: {fileID: 8300000, guid: ee9a04d59c5e46c46a3e904c5933e901, type: 3}
+  itemUsage: {fileID: 8300000, guid: 7ffe84789398cc74789419cf81a58c72, type: 3}
   levelManager: {fileID: 0}
 --- !u!212 &212244888098397960
 SpriteRenderer:
@@ -228,6 +238,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
