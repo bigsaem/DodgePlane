@@ -14,7 +14,7 @@ public class ScoreKeeper : MonoBehaviour {
     void Start () {
         //scoreKeeper = GameObject.Find("Score").GetComponent<ScoreKeeper>();
         scoreText = GetComponent<Text>();
-        ResetScore();
+        //ResetScore();
         
         //Invoke("ScorePoints", 0.5f);
     }

@@ -31,6 +31,7 @@ public class Enemy : MonoBehaviour {
     public int scoreValue;
     private ScoreKeeper scoreKeeper;
 
+    public AudioClip explode;
     public AudioClip fireSound;
 
 
@@ -255,11 +256,16 @@ public class Enemy : MonoBehaviour {
 
     void Die()
     {
-        Destroy(gameObject);
+        //AudioSource.PlayClipAtPoint(explode, transform.position);
+        GetComponent<SpriteRenderer>().enabled = false;
+        GetComponent<Collider2D>().enabled = false;
+        Invoke("DestroyThis", 0.8f);
         Instantiate(explosion, transform.position, Quaternion.identity);
-        
     }
 
-    
-    
+    void DestroyThis()
+    {
+        Destroy(gameObject);
+    }
+
 }
