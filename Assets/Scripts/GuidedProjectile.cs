@@ -8,7 +8,7 @@ public class GuidedProjectile : EnemyUnit {
     
     Player player;
     Enemy enemy;
-
+    
     ScoreKeeper scoreKeeper;
     public int scoreValue;
 
@@ -82,12 +82,14 @@ public class GuidedProjectile : EnemyUnit {
         else if(col.GetComponent<GuidedProjectile>() != null)
         {
             scoreKeeper.Score(scoreValue);
+            Instantiate(explosion, transform.position, Quaternion.identity);
             Destroy(gameObject);
             
         }
         else if(col.GetComponent<Projectile>() != null)
         {
             scoreKeeper.Score(scoreValue);
+            Instantiate(explosion, transform.position, Quaternion.identity);
             Destroy(gameObject);
             
         }

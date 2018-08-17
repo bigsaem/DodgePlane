@@ -9,33 +9,68 @@ public class ItemSpawner : MonoBehaviour {
     public Item[] items = new Item[4];
     float spawnDistance = 12;
     private int itemNumber;
-    
+    private float timer;
+    private int seconds;
+
 	// Use this for initialization
 	void Start () {
+        timer = 0;
         player = FindObjectOfType<Player>();
+        /*
         foreach(Item item in items)
         {
             StartCoroutine(RandomSpawn(item));
         }
+        */
     }
 	
 	// Update is called once per frame
 	void Update () {
+        timer += Time.deltaTime;
+        seconds = Mathf.FloorToInt(timer);
+        /*
+        if (seconds == 5)
+        {
+            StartCoroutine(RandomSpawn(items[0]));
+            timer += 1;
+        }
+        */
+        if (seconds == 10)
+        {
+            StartCoroutine(RandomSpawn(items[1], 4, 8));
+            //StartCoroutine(RandomSpawn(items[4], 1, 3));
+            timer += 1;
+        }
+        if (seconds == 20)
+        {
+            StartCoroutine(RandomSpawn(items[2], 10, 15));
+            timer += 1;
+        }
+        if (seconds == 25)
+        {
+            StartCoroutine(RandomSpawn(items[3], 10, 15));
+            timer += 1;
+        }
+        if (seconds == 30)
+        {
+            StartCoroutine(RandomSpawn(items[4], 20, 30));
+            timer += 1;
+        }
         //itemNumber = Mathf.FloorToInt(Random.Range(0.01f, 4.99f));
         //StartCoroutine(RandomSpawn(items[itemNumber]));
     }
-    private IEnumerator RandomSpawn(Item item)
+    private IEnumerator RandomSpawn(Item item, float rangeInner, float rangeOuter)
     {
         while (true)
         {
             SpawnEnemyLeft(item);
-            yield return new WaitForSeconds(Random.Range(5.0f, 10.0f));
+            yield return new WaitForSeconds(Random.Range(rangeInner, rangeOuter));
             SpawnEnemyRight(item);
-            yield return new WaitForSeconds(Random.Range(5.0f, 10.0f));
+            yield return new WaitForSeconds(Random.Range(rangeInner, rangeOuter));
             SpawnEnemyTop(item);
-            yield return new WaitForSeconds(Random.Range(5.0f, 10.0f));
+            yield return new WaitForSeconds(Random.Range(rangeInner, rangeOuter));
             SpawnEnemyBottom(item);
-            yield return new WaitForSeconds(Random.Range(5.0f, 10.0f));
+            yield return new WaitForSeconds(Random.Range(rangeInner, rangeOuter));
         }
 
     }

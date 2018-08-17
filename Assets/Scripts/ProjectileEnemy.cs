@@ -5,6 +5,7 @@ using UnityEngine;
 public class ProjectileEnemy : EnemyUnit {
     Player player;
     ScoreKeeper scoreKeeper;
+    
     public int scoreValue;
     private void Awake()
     {
@@ -31,6 +32,7 @@ public class ProjectileEnemy : EnemyUnit {
         if (col.GetComponent<Player>() != null)
         {
             scoreKeeper.Score(scoreValue);
+            Instantiate(explosion, transform.position, Quaternion.identity);
             Destroy(gameObject);
             
         }
@@ -44,17 +46,22 @@ public class ProjectileEnemy : EnemyUnit {
             
         }
         */
+        /*
         else if (col.GetComponent<GuidedProjectile>() != null)
         {
             scoreKeeper.Score(scoreValue);
+            Instantiate(explosion, transform.position, Quaternion.identity);
             Destroy(gameObject);
             
         }
+        */
         else if (col.GetComponent<Projectile>() != null)
         {
             scoreKeeper.Score(scoreValue);
+            Instantiate(explosion, transform.position, Quaternion.identity);
             Destroy(gameObject);
             
         }
     }
+    
 }

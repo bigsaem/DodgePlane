@@ -8,9 +8,11 @@ public class EnemyUnit : MonoBehaviour {
     public void Die()
     {
         //AudioSource.PlayClipAtPoint(explode, transform.position);
-        GetComponent<SpriteRenderer>().enabled = false;
-        GetComponent<Collider2D>().enabled = false;
+        //GetComponent<SpriteRenderer>().enabled = false;
+        //GetComponent<Collider2D>().enabled = false;
+        //GetComponent<TrailRenderer>().enabled = false;
         Instantiate(explosion, transform.position, Quaternion.identity);
+        Destroy(gameObject);
         Invoke("DestroyThis", 1.5f);
         
     }
