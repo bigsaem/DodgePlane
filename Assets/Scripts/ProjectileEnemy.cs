@@ -4,12 +4,10 @@ using UnityEngine;
 
 public class ProjectileEnemy : EnemyUnit {
     Player player;
-    ScoreKeeper scoreKeeper;
     
     public int scoreValue;
     private void Awake()
     {
-        scoreKeeper = GameObject.Find("Score").GetComponent<ScoreKeeper>();
         player = FindObjectOfType<Player>();
     }
     private void Update()
@@ -63,5 +61,10 @@ public class ProjectileEnemy : EnemyUnit {
             
         }
     }
-    
+
+    protected override void AddScore()
+    {
+        scoreKeeper.Score(scoreValue);
+    }
+
 }

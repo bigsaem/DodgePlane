@@ -9,7 +9,6 @@ public class GuidedProjectile : EnemyUnit {
     Player player;
     Enemy enemy;
     
-    ScoreKeeper scoreKeeper;
     public int scoreValue;
 
     public float speed;
@@ -21,9 +20,9 @@ public class GuidedProjectile : EnemyUnit {
     private int duration;
     private float timer;
     
-    void Start()
+    protected override void Start()
     {
-        scoreKeeper = GameObject.Find("Score").GetComponent<ScoreKeeper>();
+        base.Start();
         timer = 0;
         duration = 0;
         rb = GetComponent<Rigidbody2D>();
@@ -99,6 +98,10 @@ public class GuidedProjectile : EnemyUnit {
         return damage;
     }
 
+    protected override void AddScore()
+    {
+        scoreKeeper.Score(scoreValue);
+    }
 
     /*
     Player player;

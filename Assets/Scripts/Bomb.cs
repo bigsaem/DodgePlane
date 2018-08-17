@@ -7,9 +7,15 @@ public class Bomb : MonoBehaviour {
     private float bombSize = 100;
     private float currentSize = 1;
     private Vector3 startScale = Vector3.one;
+    public ParticleSystem bombEffect;
+
 
     public void Explode()
     {
+        ParticleSystem ps = Instantiate<ParticleSystem>(bombEffect);
+        ps.transform.position = transform.position;
+        ps.transform.parent = transform.parent;
+        ps.Play();
         StartCoroutine(StartBomb());
     }
 
@@ -19,7 +25,7 @@ public class Bomb : MonoBehaviour {
         currentSize = 1;
         while(currentSize < bombSize)
         {
-            currentSize += Time.deltaTime * 30;
+            currentSize += Time.deltaTime * 80;
             transform.localScale = startScale * currentSize;
             yield return new WaitForEndOfFrame();
         }

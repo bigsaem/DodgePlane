@@ -28,7 +28,6 @@ public class Enemy : EnemyUnit {
 
     public int damage = 100;
     public int scoreValue;
-    private ScoreKeeper scoreKeeper;
 
     public AudioClip explode;
     public AudioClip fireSound;
@@ -54,12 +53,6 @@ public class Enemy : EnemyUnit {
     //private ScoreKeeper scoreKeeper;
     //public int scoreValue = 150;
 
-
-    private void Start()
-    {
-        
-        scoreKeeper = GameObject.Find("Score").GetComponent<ScoreKeeper>();
-    }
     private void Awake()
     {
         player = FindObjectOfType<Player>();
@@ -94,6 +87,11 @@ public class Enemy : EnemyUnit {
         }
         
 
+    }
+
+    protected override void AddScore()
+    {
+        scoreKeeper.Score(scoreValue);
     }
 
     void Fire()

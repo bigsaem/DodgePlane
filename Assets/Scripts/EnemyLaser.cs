@@ -10,11 +10,6 @@ public class EnemyLaser : EnemyUnit {
     private float timer;
     public int seconds;
     public float angle;
-
-    // Use this for initialization
-    void Start () {
-       
-    }
     
     private void Awake()
     {
@@ -38,4 +33,5 @@ public class EnemyLaser : EnemyUnit {
         }
         
     }
+
 }
