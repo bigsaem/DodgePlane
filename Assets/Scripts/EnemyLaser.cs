@@ -10,6 +10,7 @@ public class EnemyLaser : EnemyUnit {
     private float timer;
     public int seconds;
     public float angle;
+    public AudioClip fireSound;
 
     // Use this for initialization
     void Start () {
@@ -33,6 +34,7 @@ public class EnemyLaser : EnemyUnit {
         {
             Vector3 startPosition = transform.position;
             GameObject thickLaser = Instantiate(laser, startPosition, Quaternion.identity);
+            AudioSource.PlayClipAtPoint(fireSound, thickLaser.transform.position);
             thickLaser.transform.Rotate(0, 0, angle);
             Destroy(gameObject);
         }

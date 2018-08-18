@@ -5,6 +5,7 @@ using UnityEngine;
 public class Laser : EnemyUnit {
     private float timer;
     public int seconds;
+    
     // Use this for initialization
     void Start () {
 		

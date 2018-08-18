@@ -12,8 +12,10 @@ public class EnemySpawner : MonoBehaviour {
     float spawnDistance = 12;
     private float spawnLaserDistance = 6;
     public ScoreKeeper currentScore;
-	
-	void Start () {
+    public AudioClip chargingSound;
+    
+
+    void Start () {
         player = FindObjectOfType<Player>();
         StartCoroutine(RandomSpawn(enemies[0], 0.2f, 1));
         //StartCoroutine(RandomSpawn(enemies[4], 4, 5));
@@ -84,7 +86,7 @@ public class EnemySpawner : MonoBehaviour {
 
     EnemyLaser SpawnEnemyLaserLeft(EnemyLaser enemyLaser)
     {
-
+        AudioSource.PlayClipAtPoint(chargingSound, transform.position);
         Vector3 spawnPos = (player.transform.position)
         + new Vector3(-spawnLaserDistance * Mathf.Sin(player.getAngle()*Mathf.Deg2Rad), spawnLaserDistance * Mathf.Cos(player.getAngle() * Mathf.Deg2Rad));
         EnemyLaser e = Instantiate<EnemyLaser>(enemyLaser, spawnPos, Quaternion.identity);
