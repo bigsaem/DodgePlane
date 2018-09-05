@@ -41,19 +41,19 @@ public class ItemSpawner : MonoBehaviour {
             //StartCoroutine(RandomSpawn(items[4], 1, 3));
             timer += 1;
         }
+        if (seconds == 15)
+        {
+            StartCoroutine(RandomSpawn(items[2], 8, 11));
+            timer += 1;
+        }
         if (seconds == 20)
         {
-            StartCoroutine(RandomSpawn(items[2], 10, 15));
+            StartCoroutine(RandomSpawn(items[3], 8, 11));
             timer += 1;
         }
         if (seconds == 25)
         {
-            StartCoroutine(RandomSpawn(items[3], 10, 15));
-            timer += 1;
-        }
-        if (seconds == 30)
-        {
-            StartCoroutine(RandomSpawn(items[4], 20, 30));
+            StartCoroutine(RandomSpawn(items[4], 15, 25));
             timer += 1;
         }
         //itemNumber = Mathf.FloorToInt(Random.Range(0.01f, 4.99f));

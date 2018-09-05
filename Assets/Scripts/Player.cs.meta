@@ -1,11 +1,18 @@
 fileFormatVersion: 2
 guid: f404e7b142d7dbf4092d12e5be1c0b51
-timeCreated: 1526843687
-licenseType: Free
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - projectile: {instanceID: 0}
+  - deathExplosion: {instanceID: 0}
+  - shield: {instanceID: 0}
+  - fireSound: {fileID: 8300000, guid: 3b9108c24e34a1e498172168fabceeb1, type: 3}
+  - explode: {fileID: 8300000, guid: cf8ac43adf1d2744c9c49ca83a8c2423, type: 3}
+  - bombSound: {instanceID: 0}
+  - itemPickup: {instanceID: 0}
+  - itemUsage: {instanceID: 0}
+  - levelManager: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

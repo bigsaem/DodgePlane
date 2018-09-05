@@ -22,25 +22,25 @@ public class EnemySpawner : MonoBehaviour {
 
     private void Update()
     {
-        if (player.getSeconds() == 15)
+        if (player.getSeconds() == 10)
         {
             StartCoroutine(RandomSpawn(enemies[1], 1, 2));
 
             player.addToTimer();
 
         }
-        if(player.getSeconds() == 25)
+        if(player.getSeconds() == 23)
         {
             StartCoroutine(RandomSpawn(enemies[2], 2, 3));
             StartCoroutine(RandomLaserSpawn(enemylaser, 5, 6));
             player.addToTimer();
         }
-        if (player.getSeconds() == 40)
+        if (player.getSeconds() == 33)
         {
             StartCoroutine(RandomSpawn(enemies[3], 3, 4));
             player.addToTimer();
         }
-        if (player.getSeconds() == 60)
+        if (player.getSeconds() == 45)
         {
             StartCoroutine(RandomSpawn(enemies[4], 4, 5));
             player.addToTimer();

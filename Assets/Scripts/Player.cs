@@ -51,7 +51,9 @@ public class Player : MonoBehaviour {
     private bool pointBoostTimer = false;
     private int pointBoostStart;
 
+    public AudioClip fireSound;
     public AudioClip explode;
+    public AudioClip bombSound;
     public AudioClip itemPickup;
     public AudioClip itemUsage;
     internal AudioSource AudioS;
@@ -93,7 +95,7 @@ public class Player : MonoBehaviour {
                 GameObject scatterShot6 = Instantiate(projectile, startPosition, Quaternion.identity) as GameObject;
                 GameObject scatterShot7 = Instantiate(projectile, startPosition, Quaternion.identity) as GameObject;
 
-
+                AudioSource.PlayClipAtPoint(fireSound, transform.position);
 
                 scatterShot0.GetComponent<Rigidbody2D>().velocity = new Vector2(projectileSpeed, 0);
                 scatterShot1.GetComponent<Rigidbody2D>().velocity = new Vector2(projectileSpeed / 2, projectileSpeed / 2);
@@ -410,6 +412,7 @@ public class Player : MonoBehaviour {
         invulnerable = true;
         bomb.gameObject.SetActive(true);
         bomb.Explode();
+        AudioSource.PlayClipAtPoint(bombSound, transform.position);
     }
     public void ScorePoints()
     {
