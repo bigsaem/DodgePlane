@@ -9,7 +9,10 @@ public class LevelManager : MonoBehaviour {
     {
         Application.LoadLevel(name);
     }
-
+    public void QuitApplication()
+    {
+        Application.Quit();
+    }
     public void QuitRequest()
     {
         SceneManager.LoadScene("Start");
